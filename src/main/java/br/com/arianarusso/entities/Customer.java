@@ -10,16 +10,24 @@ public class Customer {
     private String firstName;
     private String lastName;
     private String document;
-    private Address address;
-    private List<Account> accounts;
+    private UUID addressId;
+    private List<UUID> accountIds;
 
-    public Customer(UUID id, String firstName, String lastName, String document, Address address, List<Account> accounts) {
+    public Customer(UUID id, String firstName, String lastName, String document, UUID addressId, List<UUID> accountIds) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.document = document;
-        this.address = address;
-        this.accounts = accounts;
+        this.addressId = addressId;
+        this.accountIds = accountIds;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -46,31 +54,19 @@ public class Customer {
         this.document = document;
     }
 
-    public Address getAddress() {
-        return address;
+    public UUID getAddressId() {
+        return addressId;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddressId(UUID addressId) {
+        this.addressId = addressId;
     }
 
-    public List<Account> getAccounts() {
-        return accounts;
+    public List<UUID> getAccountIds() {
+        return accountIds;
     }
 
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
-    }
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", document='" + document + '\'' +
-                ", adress=" + address +
-                ", accounts=" + accounts +
-                '}';
+    public void setAccountIds(List<UUID> accountIds) {
+        this.accountIds = accountIds;
     }
 }
