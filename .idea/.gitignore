@@ -1,4 +1,6 @@
-git add idea/.gitignore
-
+# Default ignored files
+/shelf/
+/workspace.xml
+target/
 
 
