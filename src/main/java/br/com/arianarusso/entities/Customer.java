@@ -66,7 +66,19 @@ public class Customer {
         return accountIds;
     }
 
-    public void setAccountIds(List<UUID> accountIds) {
+    private void setAccountIds(List<UUID> accountIds) {
         this.accountIds = accountIds;
+    }
+
+    public void addAccount(UUID newIdAccount){
+        if(!this.accountIds.isEmpty() && !this.accountIds.contains(newIdAccount)){
+            this.accountIds.add(newIdAccount);
+        }
+    }
+
+    public void removeAccount (UUID idAccount) {
+        if (!this.accountIds.isEmpty() && this.accountIds.contains(idAccount)) {
+            this.accountIds.remove(idAccount);
+        }
     }
 }
