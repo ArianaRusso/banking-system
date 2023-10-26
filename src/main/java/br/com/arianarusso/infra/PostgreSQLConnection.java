@@ -3,19 +3,25 @@ package br.com.arianarusso.infra;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 public class PostgreSQLConnection {
 
     public static void main(String[] args) {
 
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("application");
+
+        String url = resourceBundle.getString("DB_URL");
+        String user = resourceBundle.getString("DB_USER");
+        String password = resourceBundle.getString("DB_PASSWORD");
+
         Connection connection = null;
 
         try {
             Class.forName("org.postgresql.Driver");
-            String url = System.getenv("DB_URL");
-            String user = System.getenv("DB_USER");
-            String password = System.getenv("DB_PASSWORD");
-
+//            String url = System.getenv("DB_URL");
+//            String user = System.getenv("DB_USER");
+//            String password = System.getenv("DB_PASSWORD");
 
             connection = DriverManager.getConnection(url, user, password);
 
