@@ -1,4 +1,4 @@
-package br.com.arianarusso.infra;
+package br.com.arianarusso.infra.repositories;
 
 import java.util.List;
 import java.util.UUID;
@@ -8,4 +8,5 @@ public interface GenericRepository <T>{
     T findById(UUID id);
     List<T> listAll();
     void deleteById (UUID id);
+    T update(T t, UUID id);
 }

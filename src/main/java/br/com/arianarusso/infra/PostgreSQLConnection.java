@@ -7,15 +7,16 @@ import java.util.ResourceBundle;
 
 public class PostgreSQLConnection {
 
-    public static void main(String[] args) {
+    private Connection connection;
 
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("application");
+    private static ResourceBundle resourceBundle = ResourceBundle.getBundle("application");
 
-        String url = resourceBundle.getString("DB_URL");
-        String user = resourceBundle.getString("DB_USER");
-        String password = resourceBundle.getString("DB_PASSWORD");
+    private final static String url = resourceBundle.getString("DB_URL");
+    private final static String user = resourceBundle.getString("DB_USER");
+    private final static String password = resourceBundle.getString("DB_PASSWORD");
 
-        Connection connection = null;
+
+    public Connection getConnection(){
 
         try {
             Class.forName("org.postgresql.Driver");
@@ -31,14 +32,7 @@ public class PostgreSQLConnection {
         } catch (SQLException e) {
             System.err.println("Erro na conexão com o PostgreSQL.");
             e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
+        return connection;
     }
 }
