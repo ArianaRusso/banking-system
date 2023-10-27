@@ -19,9 +19,6 @@ public class PostgreSQLConnection {
 
         try {
             Class.forName("org.postgresql.Driver");
-//            String url = System.getenv("DB_URL");
-//            String user = System.getenv("DB_USER");
-//            String password = System.getenv("DB_PASSWORD");
 
             connection = DriverManager.getConnection(url, user, password);
 
