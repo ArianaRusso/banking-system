@@ -1,6 +1,6 @@
 package br.com.arianarusso.infra.repositories;
 
-import br.com.arianarusso.infra.PostgreSQLConnection;
+import br.com.arianarusso.infra.SQLConnection;
 import br.com.arianarusso.infra.mappers.EntityMapper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,13 +12,13 @@ import java.util.UUID;
 
 public class GenericRepositoryImpl<T> implements GenericRepository<T>{
 
-    private PostgreSQLConnection connection;
+    private SQLConnection connection;
     private EntityMapper<T> entityMapper;
     private String table;
     private String insertSQL;
     private String updateSQL;
 
-    public GenericRepositoryImpl(PostgreSQLConnection connection, EntityMapper<T> entityMapper, String table) {
+    public GenericRepositoryImpl(SQLConnection connection, EntityMapper<T> entityMapper, String table) {
         this.connection = connection;
         this.entityMapper = entityMapper;
         this.table = table;
