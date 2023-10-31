@@ -22,6 +22,8 @@ public class GenericRepositoryImpl<T> implements GenericRepository<T>{
         this.connection = connection;
         this.entityMapper = entityMapper;
         this.table = table;
+        setUpdateSQL();
+        setInsertSQL();
     }
 
     private void setInsertSQL(){
@@ -63,7 +65,6 @@ public class GenericRepositoryImpl<T> implements GenericRepository<T>{
 
     @Override
     public void save(T t) {
-        setInsertSQL();
         try (Connection conn = connection.getConnection();
              PreparedStatement statement = conn.prepareStatement(this.insertSQL)) {
             entityMapper.entityToPreparedStatement(statement, t);
@@ -80,12 +81,11 @@ public class GenericRepositoryImpl<T> implements GenericRepository<T>{
         try (Connection conn = connection.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql)) {
             statement.setObject(1, id);
-
-            try (ResultSet resultSet = statement.executeQuery()) {
+            ResultSet resultSet = statement.executeQuery();
                 if (resultSet.next()) {
                     return entityMapper.resultSetToEntity(resultSet);
                 }
-            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -122,7 +122,6 @@ public class GenericRepositoryImpl<T> implements GenericRepository<T>{
 
     @Override
     public T update(T t, UUID id) {
-        setUpdateSQL();
         try (Connection conn = connection.getConnection();
              PreparedStatement statement = conn.prepareStatement(this.updateSQL)) {
             entityMapper.entityToPreparedStatement(statement, t);
