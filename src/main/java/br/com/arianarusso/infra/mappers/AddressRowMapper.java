@@ -9,10 +9,19 @@ import java.util.*;
 
 public class AddressRowMapper implements EntityMapper<Address> {
 
+    public static final String ID = "id";
+    public static final String POSTAL_CODE = "postal_code";
+    public static final String STREET = "street";
+    public static final String NUMBER = "number";
+    public static final String COMPLEMENT = "complement";
+    public static final String CITY = "city";
+    public static final String STATE = "state";
+    public static final String COUNTRY = "country";
+
     @Override
     public List<String> getColumnNames() {
         return Arrays.asList
-                ("id", "postal_code ", "street", "number", "complement", "city", "state", "country");
+                (ID, POSTAL_CODE, STREET, NUMBER, COMPLEMENT, CITY, STATE, COUNTRY);
     }
 
     @Override
@@ -28,16 +37,15 @@ public class AddressRowMapper implements EntityMapper<Address> {
 
     @Override
     public Address resultSetToEntity(ResultSet resultSet) throws SQLException {
-
-            Address address = new Address();
-            address.setId(UUID.fromString(resultSet.getString("id")));
-            address.setPostalCode(resultSet.getString("postal_code"));
-            address.setStreet(resultSet.getString("street"));
-            address.setNumber(resultSet.getInt("number"));
-            address.setComplement(resultSet.getString("complement"));
-            address.setCity(resultSet.getString("city"));
-            address.setState(resultSet.getString("state"));
-            address.setCountry(resultSet.getString("country"));
+            Address address = new Address(
+                    UUID.fromString(resultSet.getString(ID)),
+                    resultSet.getString(POSTAL_CODE),
+                    resultSet.getString(STREET),
+                    resultSet.getInt(NUMBER),
+                    resultSet.getString(COMPLEMENT),
+                    resultSet.getString(CITY),
+                    resultSet.getString(STATE),
+                    resultSet.getString(COUNTRY));
 
         return address;
     }

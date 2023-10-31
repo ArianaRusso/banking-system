@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class PostgreSQLConnection {
+public class SQLConnection {
 
     private Connection connection;
 
@@ -14,12 +14,13 @@ public class PostgreSQLConnection {
     private final static String url = resourceBundle.getString("DB_URL");
     private final static String user = resourceBundle.getString("DB_USER");
     private final static String password = resourceBundle.getString("DB_PASSWORD");
+    private final static String driver = resourceBundle.getString("DB_DRIVER");
 
 
     public Connection getConnection(){
 
         try {
-            Class.forName("org.postgresql.Driver");
+            Class.forName(driver);
 
             connection = DriverManager.getConnection(url, user, password);
 
