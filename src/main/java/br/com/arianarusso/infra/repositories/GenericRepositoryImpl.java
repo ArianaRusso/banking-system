@@ -16,6 +16,7 @@ public class GenericRepositoryImpl<T> implements GenericRepository<T>{
     private EntityMapper<T> entityMapper;
     private String table;
     private String insertSQL;
+    private String updateSQL;
 
     public GenericRepositoryImpl(PostgreSQLConnection connection, EntityMapper<T> entityMapper, String table) {
         this.connection = connection;
@@ -23,17 +24,46 @@ public class GenericRepositoryImpl<T> implements GenericRepository<T>{
         this.table = table;
     }
 
-    protected void setStatementValues (PreparedStatement statement, Object object) throws SQLException{}
-    protected void setInsertSQL(String sql){
-        this.insertSQL = sql;
+    private void setInsertSQL(){
+        List<String> columns = entityMapper.getColumnNames();
+        StringBuilder sqlBuilder = new StringBuilder("INSERT INTO ");
+        sqlBuilder.append(table).append(" (");
+
+        for (String column : columns) {
+            sqlBuilder.append(column).append(", ");
+        }
+
+        sqlBuilder.delete(sqlBuilder.length() - 2, sqlBuilder.length());
+
+        sqlBuilder.append(") VALUES (");
+
+        for (int i = 0; i < columns.size(); i++) {
+            sqlBuilder.append("?, ");
+        }
+
+        sqlBuilder.delete(sqlBuilder.length() - 2, sqlBuilder.length());
+
+        sqlBuilder.append(")");
+        insertSQL = sqlBuilder.toString();
     }
 
-    //falta terminar e desacoplar
+    private void setUpdateSQL(){
+        List<String> columns = entityMapper.getColumnNames();
+        StringBuilder sqlBuilder = new StringBuilder("UPDATE ");
+        sqlBuilder.append(table).append(" SET ");
+
+        for (String column : columns) {
+            sqlBuilder.append(column).append(" = ?, ");
+        }
+        sqlBuilder.delete(sqlBuilder.length() - 2, sqlBuilder.length());
+        sqlBuilder.append(" WHERE id = ?");
+        updateSQL = sqlBuilder.toString();
+
+    }
+
     @Override
     public void save(T t) {
-        String sql= String.format
-                ("INSERT INTO %s (id, postal_code, street, number, complement, city, state, contry)" +
-                        "VALUES (?, ?, ?, ?, ?, ?, ?,?", this.table);
+        setInsertSQL();
         try (Connection conn = connection.getConnection();
              PreparedStatement statement = conn.prepareStatement(this.insertSQL)) {
             entityMapper.entityToPreparedStatement(statement, t);
@@ -59,7 +89,6 @@ public class GenericRepositoryImpl<T> implements GenericRepository<T>{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 
@@ -90,25 +119,18 @@ public class GenericRepositoryImpl<T> implements GenericRepository<T>{
         }
     }
 
+
     @Override
     public T update(T t, UUID id) {
-        return null;
+        setUpdateSQL();
+        try (Connection conn = connection.getConnection();
+             PreparedStatement statement = conn.prepareStatement(this.updateSQL)) {
+            entityMapper.entityToPreparedStatement(statement, t);
+            statement.setObject(entityMapper.getColumnNames().size() + 1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return findById(id);
     }
-
-//    @Override
-//    public T update(String sql, T t, UUID id) {
-//        try (Connection conn = connection.getConnection();
-//             PreparedStatement statement = conn.prepareStatement(sql)) {
-//            // Configure os parâmetros do PreparedStatement com base no objeto T
-//            statement.setString(1, novoValorColuna1);
-//            statement.setString(2, novoValorColuna2);
-//            statement.setObject(3, id);
-//
-//            statement.executeUpdate();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return findById(sql,id); // Retorna o objeto atualizado (ou null se não encontrado)
-//    }
 }

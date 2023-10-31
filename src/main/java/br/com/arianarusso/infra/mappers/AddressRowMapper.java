@@ -5,11 +5,15 @@ import br.com.arianarusso.entities.Address;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class AddressRowMapper implements EntityMapper<Address> {
+
+    @Override
+    public List<String> getColumnNames() {
+        return Arrays.asList
+                ("id", "postal_code ", "street", "number", "complement", "city", "state", "country");
+    }
 
     @Override
     public List<Address> resultSetToEntityList(ResultSet resultSet) throws SQLException {
@@ -40,14 +44,15 @@ public class AddressRowMapper implements EntityMapper<Address> {
 
     @Override
     public void entityToPreparedStatement(PreparedStatement statement, Address entity) throws SQLException {
-        Address address = new Address();
-        statement.setString(1, address.getPostalCode());
-        statement.setString(2, address.getStreet());
-        statement.setInt(3, address.getNumber());
-        statement.setString(4, address.getComplement());
-        statement.setString(5, address.getCity());
-        statement.setString(6, address.getState());
-        statement.setString(7, address.getCountry());
+
+        statement.setObject(1, entity.getId());
+        statement.setString(2, entity.getPostalCode());
+        statement.setString(3, entity.getStreet());
+        statement.setInt(4, entity.getNumber());
+        statement.setString(5, entity.getComplement());
+        statement.setString(6, entity.getCity());
+        statement.setString(7, entity.getState());
+        statement.setString(8, entity.getCountry());
     }
 }
 

@@ -13,6 +13,20 @@ public class Address {
     private String state;
     private String country;
 
+    public Address(UUID id, String postalCode, String street, int number, String complement, String city, String state, String country) {
+        this.id = id;
+        this.postalCode = postalCode;
+        this.street = street;
+        this.number = number;
+        this.complement = complement;
+        this.city = city;
+        this.state = state;
+        this.country = country;
+    }
+
+    public Address() {
+    }
+
     public UUID getId() {
         return id;
     }

@@ -3,10 +3,7 @@ import br.com.arianarusso.infra.PostgreSQLConnection;
 import br.com.arianarusso.infra.mappers.AddressRowMapper;
 import br.com.arianarusso.infra.mappers.EntityMapper;
 import br.com.arianarusso.infra.repositories.AddressRepositoryImpl;
-import br.com.arianarusso.infra.repositories.GenericRepository;
 import br.com.arianarusso.infra.repositories.GenericRepositoryImpl;
-
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,5 +27,17 @@ public class MainApp {
         System.out.println("Busca por id " + address);
 
         addressRepository.deleteAddressById(id);
+
+        Address novoAddress = new Address
+                (id, "123456", "Washington",
+                        333, "Casa 10", "Valinhos", "SP", "Brasil");
+
+        addressRepository.saveAddress(novoAddress);
+        System.out.println("Nova lista: "+addressRepository.listAllAddress());
+
+        Address addressToUpdate = new Address(id, "123456", "João",
+                333, "Casa 10", "Valinhos", "SP", "Brasil");
+        addressRepository.updateAddress(addressToUpdate, id);
+        System.out.println("Lista após update: "+addressRepository.listAllAddress());
     }
 }
