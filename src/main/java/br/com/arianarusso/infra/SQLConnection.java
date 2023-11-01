@@ -1,5 +1,7 @@
 package br.com.arianarusso.infra;
 
+
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -15,7 +17,6 @@ public class SQLConnection {
     private final static String user = resourceBundle.getString("DB_USER");
     private final static String password = resourceBundle.getString("DB_PASSWORD");
     private final static String driver = resourceBundle.getString("DB_DRIVER");
-
 
     public Connection getConnection(){
 

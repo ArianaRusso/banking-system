@@ -13,8 +13,8 @@ public class Address {
     private String state;
     private String country;
 
-    public Address(UUID id, String postalCode, String street, int number, String complement, String city, String state, String country) {
-        this.id = id;
+    public Address(String postalCode, String street, int number, String complement, String city, String state, String country) {
+
         this.postalCode = postalCode;
         this.street = street;
         this.number = number;
@@ -29,10 +29,6 @@ public class Address {
 
     public UUID getId() {
         return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public String getPostalCode() {

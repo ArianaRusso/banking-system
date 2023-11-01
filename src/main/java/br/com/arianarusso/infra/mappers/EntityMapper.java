@@ -1,5 +1,4 @@
 package br.com.arianarusso.infra.mappers;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
