@@ -4,8 +4,6 @@ package br.com.arianarusso.infra.repositories;
 import br.com.arianarusso.infra.SQLConnection;
 import br.com.arianarusso.infra.mappers.EntityMapper;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Dependent
+
 public class GenericRepositoryImpl<T> implements GenericRepository<T>{
 
     private SQLConnection connection;
@@ -23,7 +21,6 @@ public class GenericRepositoryImpl<T> implements GenericRepository<T>{
     private String insertSQL;
     private String updateSQL;
 
-    @Inject
     public GenericRepositoryImpl(SQLConnection connection, EntityMapper<T> entityMapper, String table) {
         this.connection = connection;
         this.entityMapper = entityMapper;
