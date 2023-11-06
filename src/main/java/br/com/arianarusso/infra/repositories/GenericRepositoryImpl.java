@@ -135,4 +135,22 @@ public class GenericRepositoryImpl<T> implements GenericRepository<T>{
         }
         return findById(id);
     }
+
+    @Override
+    public T findByNumber(int number) {
+        String sql = String.format("SELECT * FROM %s WHERE number = ?", this.table);
+
+        try (Connection conn = connection.getConnection();
+             PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setObject(1, number);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return entityMapper.resultSetToEntity(resultSet);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

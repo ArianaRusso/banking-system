@@ -1,6 +1,8 @@
 package br.com.arianarusso.infra.repositories;
 
 import br.com.arianarusso.entities.Account;
+import br.com.arianarusso.exceptions.NotFoundResourceException;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -17,11 +19,14 @@ public class AccountRepositoryImpl {
     }
 
     public Account findAccountById(UUID id){
-        return repository.findById(id);
+        Account account = repository.findById(id);
+        if(account == null){
+            throw new NotFoundResourceException("Account not found");
+        }
+        return account;
     }
 
     public List<Account> listAllAccounts(){
-
        return repository.listAll();
     }
 
@@ -32,5 +37,13 @@ public class AccountRepositoryImpl {
     public Account updateCustomer(Account account, UUID id){
 
         return repository.update(account, id);
+    }
+
+    public Account findAccountByNumber(int numberAccount) {
+        Account account = repository.findByNumber(numberAccount);
+        if(account == null){
+            throw new NotFoundResourceException("Account not found");
+        }
+        return account;
     }
 }
