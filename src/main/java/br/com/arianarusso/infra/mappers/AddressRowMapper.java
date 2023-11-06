@@ -16,6 +16,7 @@ public class AddressRowMapper implements EntityMapper<Address> {
     public static final String CITY = "city";
     public static final String STATE = "state";
     public static final String COUNTRY = "country";
+    private static final String ID = "id";
 
     @Override
     public List<String> getColumnNames() {
@@ -36,7 +37,8 @@ public class AddressRowMapper implements EntityMapper<Address> {
 
     @Override
     public Address resultSetToEntity(ResultSet resultSet) throws SQLException {
-            Address address = new Address(
+            return new Address(
+                    UUID.fromString(resultSet.getString(ID)),
                     resultSet.getString(POSTAL_CODE),
                     resultSet.getString(STREET),
                     resultSet.getInt(NUMBER),
@@ -44,8 +46,6 @@ public class AddressRowMapper implements EntityMapper<Address> {
                     resultSet.getString(CITY),
                     resultSet.getString(STATE),
                     resultSet.getString(COUNTRY));
-
-        return address;
     }
 
     @Override

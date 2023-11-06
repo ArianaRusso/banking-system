@@ -1,5 +1,5 @@
 CREATE TABLE address (
-    id UUID PRIMARY KEY,
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     postal_code VARCHAR(10),
     street VARCHAR(100),
     number INT,
@@ -9,24 +9,22 @@ CREATE TABLE address (
     country VARCHAR(20)
 );
 
-CREATE TABLE account (
-    id UUID PRIMARY KEY,
-    number VARCHAR(20),
-    balance DECIMAL(10, 2)
-);
-
 CREATE TABLE customer (
-    id UUID PRIMARY KEY,
+   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     first_name VARCHAR(20),
     last_name VARCHAR(20),
     document VARCHAR(20),
     address_id UUID,
-    FOREIGN KEY (address_id) REFERENCES address (id)
+    FOREIGN KEY (address_id) REFERENCES address (id) ON DELETE CASCADE
 );
 
-CREATE TABLE customer_account (
+CREATE SEQUENCE number_sequence START 1;
+
+CREATE TABLE account (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    number INT DEFAULT nextval('number_sequence'),
+    balance DECIMAL(10, 2),
     customer_id UUID,
-    account_id UUID,
-    FOREIGN KEY (customer_id) REFERENCES customer (id),
-    FOREIGN KEY (account_id) REFERENCES account (id)
+    FOREIGN KEY (customer_id) REFERENCES customer (id) ON DELETE CASCADE
 );
+

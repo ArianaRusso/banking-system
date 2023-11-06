@@ -1,17 +1,13 @@
 package br.com.arianarusso.infra.repositories;
 
 import br.com.arianarusso.entities.Address;
-
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.util.*;
 
-@ApplicationScoped
+
 public class AddressRepositoryImpl {
 
     private GenericRepository<Address> repository;
 
-    @Inject
     public AddressRepositoryImpl(GenericRepository<Address> repository) {
         this.repository = repository;
     }

@@ -1,0 +1,10 @@
+br\com\arianarusso\infra\repositories\GenericRepositoryImpl.class
+MainApp.class
+br\com\arianarusso\infra\repositories\GenericRepository.class
+br\com\arianarusso\entities\Customer.class
+br\com\arianarusso\infra\mappers\EntityMapper.class
+br\com\arianarusso\infra\mappers\AddressRowMapper.class
+br\com\arianarusso\entities\Address.class
+br\com\arianarusso\entities\Account.class
+br\com\arianarusso\infra\SQLConnection.class
+br\com\arianarusso\infra\repositories\AddressRepositoryImpl.class
