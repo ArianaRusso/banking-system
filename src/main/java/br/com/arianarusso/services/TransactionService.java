@@ -6,7 +6,7 @@ import br.com.arianarusso.infra.repositories.AccountRepositoryImpl;
 
 import java.math.BigDecimal;
 
-public class TransactionService {
+public class TransactionService implements PaymentGateway{
 
     private AccountRepositoryImpl accountRepository;
 

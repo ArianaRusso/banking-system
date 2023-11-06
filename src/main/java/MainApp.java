@@ -1,3 +1,4 @@
+import br.com.arianarusso.PaymentData;
 import br.com.arianarusso.entities.Account;
 import br.com.arianarusso.entities.Address;
 import br.com.arianarusso.entities.Customer;
@@ -10,10 +11,12 @@ import br.com.arianarusso.infra.repositories.AccountRepositoryImpl;
 import br.com.arianarusso.infra.repositories.AddressRepositoryImpl;
 import br.com.arianarusso.infra.repositories.CustomerRepositoryImpl;
 import br.com.arianarusso.infra.repositories.GenericRepositoryImpl;
+import br.com.arianarusso.services.PaymentService;
 import br.com.arianarusso.services.TransactionService;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.UUID;
 
 
@@ -82,8 +85,14 @@ public class MainApp {
 
         TransactionService transactionService = new TransactionService(accountRepository);
         System.out.println(transactionService.checkAccountBalance(10));
-        transactionService.withDraw(9, new BigDecimal("100.0"));
+        //transactionService.withDraw(9, new BigDecimal("100.0"));
         //transactionService.transferValue(10, 9, new BigDecimal("200.0"));
+
+        PaymentService paymentService = new PaymentService(transactionService);
+        Account payingAccount = accountRepository.findAccountByNumber(9);
+        Account receivingAccount = accountRepository.findAccountByNumber(10);
+        PaymentData paymentData = new PaymentData(receivingAccount, new BigDecimal("50.0"), new Date());
+        paymentService.payBill(payingAccount, paymentData);
 
 
 
