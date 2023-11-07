@@ -68,6 +68,7 @@ public class GenericRepositoryImpl<T> implements GenericRepository<T>{
 
     @Override
     public void save(T t) {
+        System.out.println("Insert do save"+insertSQL);
         try (Connection conn = connection.getConnection();
              PreparedStatement statement = conn.prepareStatement(this.insertSQL)) {
             entityMapper.entityToPreparedStatement(statement, t);

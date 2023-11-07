@@ -14,13 +14,13 @@ public class TransactionService implements PaymentGateway{
         this.accountRepository = accountRepository;
     }
 
-    public BigDecimal checkAccountBalance (int numberAccount){
-        Account account = accountRepository.findAccountByNumber(numberAccount);
+    public BigDecimal checkAccountBalance (int accountNumber){
+        Account account = accountRepository.findAccountByNumber(accountNumber);
         return account.getBalance();
     }
 
-    public void payIn (int numberAccount, BigDecimal value){
-        Account account = accountRepository.findAccountByNumber(numberAccount);
+    public void payIn (int accountNumber, BigDecimal value){
+        Account account = accountRepository.findAccountByNumber(accountNumber);
         if(value.compareTo(BigDecimal.ZERO) <= 0){
             throw new BusinessRuleException("Value must be greater than zero");
         }
@@ -29,8 +29,8 @@ public class TransactionService implements PaymentGateway{
         this.alter(account, newBalance);
     }
 
-    public void withDraw (int numberAccount, BigDecimal value){
-        Account account = accountRepository.findAccountByNumber(numberAccount);
+    public void withDraw (int accountNumber, BigDecimal value){
+        Account account = accountRepository.findAccountByNumber(accountNumber);
         if(value.compareTo(BigDecimal.ZERO) <= 0){
             throw new BusinessRuleException("Value must be greater than zero");
         }
@@ -43,13 +43,13 @@ public class TransactionService implements PaymentGateway{
 
     }
 
-    public void transferValue (int numberAccountSender, int numberAccountReceiver, BigDecimal value){
-        this.withDraw(numberAccountSender, value);
-        this.payIn(numberAccountReceiver, value);
+    public void transferValue (int accountNumberSender, int accountNumberReceiver, BigDecimal value){
+        this.withDraw(accountNumberSender, value);
+        this.payIn(accountNumberReceiver, value);
     }
 
     private void alter(Account account, BigDecimal value){
         Account updatedAccount = new Account(account.getId(), account.getNumber(), value, account.getCustomerId());
-        accountRepository.updateCustomer(updatedAccount, updatedAccount.getId());
+        accountRepository.updateAccount(updatedAccount, updatedAccount.getId());
     }
 }

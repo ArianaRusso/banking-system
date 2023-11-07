@@ -34,7 +34,7 @@ public class AccountRepositoryImpl {
         repository.deleteById(id);
     }
 
-    public Account updateCustomer(Account account, UUID id){
+    public Account updateAccount(Account account, UUID id){
 
         return repository.update(account, id);
     }

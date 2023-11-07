@@ -1,4 +1,4 @@
-package br.com.arianarusso;
+package br.com.arianarusso.dtos;
 
 import br.com.arianarusso.entities.Account;
 

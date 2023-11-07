@@ -23,11 +23,11 @@ public class Account {
 
     }
 
-    public Account(UUID id, int number, BigDecimal balance, UUID idCustomer) {
+    public Account(UUID id, int number, BigDecimal balance, UUID customerId) {
         this.id = id;
         this.number = number;
         this.balance = balance;
-        this.customerId = idCustomer;
+        this.customerId = customerId;
 
     }
 
@@ -36,6 +36,10 @@ public class Account {
 
     public UUID getId() {
         return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public int getNumber() {
@@ -55,7 +59,7 @@ public class Account {
         return "Account{" +
                 "id=" + id +
                 ", number='" + number + '\'' +
-                ", idCustomer=" + customerId +
+                ", customer_id=" + customerId +
                 ", balance=" + balance +
                 '}';
     }

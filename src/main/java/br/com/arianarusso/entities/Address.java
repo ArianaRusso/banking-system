@@ -43,6 +43,10 @@ public class Address {
         return id;
     }
 
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
     public String getPostalCode() {
         return postalCode;
     }
