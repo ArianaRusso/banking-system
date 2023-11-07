@@ -1,33 +1,41 @@
-package br.com.arianarusso.entities;
+package br.com.arianarusso.accountaccess.entities;
+
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
-
+@Entity
+@Table(name = "tb_customer")
 public class Customer {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String firstName;
     private String lastName;
     private String document;
-    private UUID addressId;
+
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
 
 
     public Customer
-            (String firstName, String lastName, String document, UUID addressId) {
+            (String firstName, String lastName, String document, Address address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.document = document;
-        this.addressId = addressId;
+        this.address = address;
 
     }
 
     public Customer
-            (UUID id, String firstName, String lastName, String document, UUID addressId) {
+            (UUID id, String firstName, String lastName, String document, Address address) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.document = document;
-        this.addressId = addressId;
+        this.address = address;
     }
 
     public Customer() {
@@ -66,14 +74,13 @@ public class Customer {
         this.document = document;
     }
 
-    public UUID getAddressId() {
-        return addressId;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAddressId(UUID addressId) {
-        this.addressId = addressId;
+    public void setAddress(Address address) {
+        this.address = address;
     }
-
 
     @Override
     public String toString() {
@@ -82,7 +89,7 @@ public class Customer {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", document='" + document + '\'' +
-                ", addressId=" + addressId +
+                ", address=" + address +
                 '}';
     }
 }

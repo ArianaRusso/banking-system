@@ -1,33 +1,43 @@
-package br.com.arianarusso.entities;
+package br.com.arianarusso.accountaccess.entities;
+
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.UUID;
 
+@Entity
+@Table(name = "tb_account")
 public class Account {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int number;
+
     private BigDecimal balance;
-    private UUID customerId;
 
+    @OneToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
-    public Account(UUID customerId) {
+    public Account(Customer customer) {
         this.balance = new BigDecimal(BigInteger.ZERO);
-        this.customerId = customerId;
+        this.customer = customer;
 
     }
-    public Account(BigDecimal balance, UUID customerId) {
+    public Account(BigDecimal balance, Customer customer) {
         this.balance = balance;
-        this.customerId = customerId;
+        this.customer = customer;
 
     }
 
-    public Account(UUID id, int number, BigDecimal balance, UUID customerId) {
+    public Account(UUID id, int number, BigDecimal balance, Customer customer) {
         this.id = id;
         this.number = number;
         this.balance = balance;
-        this.customerId = customerId;
+        this.customer = customer;
 
     }
 
@@ -46,12 +56,12 @@ public class Account {
         return number;
     }
 
-    public UUID getCustomerId() {
-        return customerId;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public BigDecimal getBalance() {
-        return balance;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     @Override
@@ -59,7 +69,7 @@ public class Account {
         return "Account{" +
                 "id=" + id +
                 ", number='" + number + '\'' +
-                ", customer_id=" + customerId +
+                ", customer_id=" + customer +
                 ", balance=" + balance +
                 '}';
     }

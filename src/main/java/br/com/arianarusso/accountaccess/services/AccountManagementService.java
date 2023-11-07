@@ -1,12 +1,12 @@
-package br.com.arianarusso.services;
+package br.com.arianarusso.accountaccess.services;
 
-import br.com.arianarusso.dtos.AccountOpeningData;
-import br.com.arianarusso.entities.Account;
-import br.com.arianarusso.entities.Address;
-import br.com.arianarusso.entities.Customer;
-import br.com.arianarusso.infra.repositories.AccountRepositoryImpl;
-import br.com.arianarusso.infra.repositories.AddressRepositoryImpl;
-import br.com.arianarusso.infra.repositories.CustomerRepositoryImpl;
+import br.com.arianarusso.accountaccess.dtos.AccountOpeningData;
+import br.com.arianarusso.accountaccess.entities.Account;
+import br.com.arianarusso.accountaccess.entities.Address;
+import br.com.arianarusso.accountaccess.entities.Customer;
+import br.com.arianarusso.accountaccess.infra.repositories.AccountRepositoryImpl;
+import br.com.arianarusso.accountaccess.infra.repositories.AddressRepositoryImpl;
+import br.com.arianarusso.accountaccess.infra.repositories.CustomerRepositoryImpl;
 
 public class AccountManagementService {
 

@@ -1,4 +1,4 @@
-package br.com.arianarusso.exceptions;
+package br.com.arianarusso.accountaccess.exceptions;
 
 public class NotFoundResourceException extends RuntimeException {
 

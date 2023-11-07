@@ -1,8 +1,8 @@
-package br.com.arianarusso.services;
+package br.com.arianarusso.accountaccess.services;
 
-import br.com.arianarusso.entities.Account;
-import br.com.arianarusso.exceptions.BusinessRuleException;
-import br.com.arianarusso.infra.repositories.AccountRepositoryImpl;
+import br.com.arianarusso.accountaccess.entities.Account;
+import br.com.arianarusso.accountaccess.exceptions.BusinessRuleException;
+import br.com.arianarusso.accountaccess.infra.repositories.AccountRepositoryImpl;
 
 import java.math.BigDecimal;
 
