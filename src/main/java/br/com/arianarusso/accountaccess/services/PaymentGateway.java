@@ -1,4 +1,4 @@
-package br.com.arianarusso.services;
+package br.com.arianarusso.accountaccess.services;
 
 import java.math.BigDecimal;
 
