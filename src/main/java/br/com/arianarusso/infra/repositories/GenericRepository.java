@@ -11,4 +11,6 @@ public interface GenericRepository <T>{
     List<T> listAll();
     void deleteById(UUID id);
     T update(T t, UUID id);
+
+    T findByNumber(int number);
 }
