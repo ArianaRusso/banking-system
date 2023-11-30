@@ -1,6 +1,6 @@
-package br.com.arianarusso.accountaccess.dtos;
+package br.com.arianarusso.dtos;
 
-import br.com.arianarusso.accountaccess.entities.Account;
+import br.com.arianarusso.entities.Account;
 
 import java.math.BigDecimal;
 import java.util.Date;

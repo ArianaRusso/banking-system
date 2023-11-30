@@ -1,7 +1,7 @@
-package br.com.arianarusso.accountaccess.services;
+package br.com.arianarusso.services;
 
-import br.com.arianarusso.accountaccess.dtos.PaymentData;
-import br.com.arianarusso.accountaccess.entities.Account;
+import br.com.arianarusso.dtos.PaymentData;
+import br.com.arianarusso.entities.Account;
 
 public class PaymentService {
 

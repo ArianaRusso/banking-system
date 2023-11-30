@@ -1,4 +1,4 @@
-package br.com.arianarusso.accountaccess.infra.repositories;
+package br.com.arianarusso.infra.repositories;
 
 
 import java.util.List;

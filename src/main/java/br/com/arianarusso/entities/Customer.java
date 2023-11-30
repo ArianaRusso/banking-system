@@ -1,41 +1,33 @@
-package br.com.arianarusso.accountaccess.entities;
-
-import jakarta.persistence.*;
+package br.com.arianarusso.entities;
 
 import java.util.UUID;
 
-@Entity
-@Table(name = "tb_customer")
+
 public class Customer {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String firstName;
     private String lastName;
     private String document;
-
-    @OneToOne
-    @JoinColumn(name = "address_id")
-    private Address address;
+    private UUID addressId;
 
 
     public Customer
-            (String firstName, String lastName, String document, Address address) {
+            (String firstName, String lastName, String document, UUID addressId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.document = document;
-        this.address = address;
+        this.addressId = addressId;
 
     }
 
     public Customer
-            (UUID id, String firstName, String lastName, String document, Address address) {
+            (UUID id, String firstName, String lastName, String document, UUID addressId) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.document = document;
-        this.address = address;
+        this.addressId = addressId;
     }
 
     public Customer() {
@@ -74,13 +66,14 @@ public class Customer {
         this.document = document;
     }
 
-    public Address getAddress() {
-        return address;
+    public UUID getAddressId() {
+        return addressId;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddressId(UUID addressId) {
+        this.addressId = addressId;
     }
+
 
     @Override
     public String toString() {
@@ -89,7 +82,7 @@ public class Customer {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", document='" + document + '\'' +
-                ", address=" + address +
+                ", addressId=" + addressId +
                 '}';
     }
 }

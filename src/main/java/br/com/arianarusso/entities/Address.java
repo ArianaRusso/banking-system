@@ -1,15 +1,9 @@
-package br.com.arianarusso.accountaccess.entities;
-
-import jakarta.persistence.*;
+package br.com.arianarusso.entities;
 
 import java.util.UUID;
 
-@Entity
-@Table(name = "tb_address")
 public class Address {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String postalCode;
     private String street;

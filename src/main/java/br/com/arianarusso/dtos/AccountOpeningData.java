@@ -1,4 +1,4 @@
-package br.com.arianarusso.accountaccess.dtos;
+package br.com.arianarusso.dtos;
 
 public record AccountOpeningData(
         String firstName,

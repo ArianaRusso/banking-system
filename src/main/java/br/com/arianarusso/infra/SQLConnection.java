@@ -1,4 +1,4 @@
-package br.com.arianarusso.accountaccess.infra;
+package br.com.arianarusso.infra;
 
 
 

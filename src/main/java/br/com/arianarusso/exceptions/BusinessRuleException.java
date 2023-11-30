@@ -1,4 +1,4 @@
-package br.com.arianarusso.accountaccess.exceptions;
+package br.com.arianarusso.exceptions;
 
 public class BusinessRuleException extends RuntimeException {
     public BusinessRuleException(String message) {
